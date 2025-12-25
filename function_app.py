@@ -43,7 +43,7 @@ def test_function(req: func.HttpRequest) -> func.HttpResponse:
     path="newcontainer/people.csv",
     connection="AzureWebJobsStorage"   # To run function with data storage locally (using Azurite & Azure storage explorer) 
 )
-@app.blob_output(
+@app.blob_output(      # output binding to create a copy of input file
     arg_name="OutBlob",
     path="processed/people1.csv",    
     connection="AzureWebJobsStorage"
@@ -69,8 +69,4 @@ def test_function(myblob: func.InputStream, OutBlob: func.Out[str]):
 
     # write to output file
     OutBlob.set("\n" .join(output_lines))
-
-
-
-  
  
